@@ -1,6 +1,6 @@
 export const BRANDING = {
   productName: "Lil Workspace",
   description: "Interactive Workspace Builder",
-  creatorName: "Khalil Gibran Hadi",
-  creatorCredit: "Created by Khalil Gibran Hadi",
+  creatorName: "Khahlil Gibran Hadi",
+  creatorCredit: "Created by Khahlil Gibran Hadi",
 } as const;

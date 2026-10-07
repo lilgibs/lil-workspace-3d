@@ -1,8 +1,7 @@
 import { BRANDING } from "@/shared/config/branding";
 
-export function CreatorCredit() {
+export function CreatorSignature() {
   return (
-    <footer className="site-footer">
       <div className="creator-credit">
         <svg className="creator-mark" viewBox="0 0 74 74" aria-hidden="true">
           <circle cx="37" cy="37" r="37" fill="#303164" />
@@ -14,6 +13,9 @@ export function CreatorCredit() {
         </svg>
         <span>{BRANDING.creatorCredit}</span>
       </div>
-    </footer>
   );
+}
+
+export function CreatorCredit() {
+  return <footer className="site-footer"><CreatorSignature /></footer>;
 }

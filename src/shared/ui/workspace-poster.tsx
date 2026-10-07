@@ -1,4 +1,4 @@
-// Original SVG illustration for Lil Workspace · Khalil Gibran Hadi.
+// Original SVG illustration for Lil Workspace · Khahlil Gibran Hadi.
 export function WorkspacePoster() {
   return (
     <svg className="workspace-poster" viewBox="0 0 720 650" role="img" aria-labelledby="workspace-poster-title workspace-poster-description">
