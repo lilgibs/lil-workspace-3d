@@ -122,7 +122,8 @@ Repeated clicks create one confirmation. Editing the setup clears it; a
 matching confirmation can survive a reload in the same tab when browser
 storage is available.
 
-**The splash stays light.** The home page uses a static SVG poster. The 3D scene
+**The splash stays light.** The home page uses the static WebP hero image from
+`public/lil-workspace-hero.webp`, served through Next.js Image. The 3D scene
 loads dynamically in the builder and summary and renders on demand. If the
 preview fails, your selections remain available and you can retry it.
 
@@ -194,7 +195,7 @@ docs/images/                     README screenshots
 
 The routes compose pages and providers; pages compose widgets. Product and
 workspace data live in entities, while shared components supply branding,
-creator credits, and the SVG splash poster.
+creator credits, and the splash hero image.
 
 ---
 
