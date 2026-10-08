@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SummaryPage } from "@/_pages/summary";
-import "./summary.css";
 
 export const metadata: Metadata = {
   title: "Review your setup | Lil Workspace",

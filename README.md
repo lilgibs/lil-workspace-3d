@@ -87,7 +87,7 @@ cover equipment only; delivery, deposits, and taxes are excluded.
 | 3D | Three.js, React Three Fiber, Drei | Procedural furniture, lighting, and camera controls |
 | State | Zustand 5 | A workspace store scoped to its provider |
 | Persistence | localStorage and sessionStorage | Save the setup across visits and the demo confirmation for the current tab |
-| Styling | Tailwind CSS 4 and CSS | Responsive layouts, component styles, and motion preferences |
+| Styling | Tailwind CSS 4 | Utility classes for layouts, responsive states, and components; shared theme and animation definitions in global CSS |
 | Typography | Self-hosted Geist and Georgia | Body text and display headings without remote font requests |
 | Hosting | Vercel | Live deployment |
 
@@ -172,7 +172,7 @@ On Windows PowerShell, use `npm.cmd` if your execution policy blocks `npm.ps1`.
 
 ```text
 src/
-├── app/                         Next.js routes, metadata, and route styles
+├── app/                         Next.js routes, metadata, and global Tailwind theme
 ├── _app/                        Workspace provider and persistence
 ├── _pages/
 │   ├── splash/                  Home page composition

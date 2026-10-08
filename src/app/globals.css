@@ -11,110 +11,33 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-green: var(--green);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-geist-sans), sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
 }
 
-* { box-sizing: border-box; }
-html { min-width: 320px; }
-body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-geist-sans), sans-serif; -webkit-font-smoothing: antialiased; }
-a { -webkit-tap-highlight-color: transparent; }
-::selection { color: #fff; background: var(--green); }
-:focus-visible { outline: 3px solid var(--green); outline-offset: 6px; }
-main:focus { outline: none; }
-.splash-shell { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
-.skip-link { position: fixed; z-index: 10; left: 16px; top: 16px; padding: 12px 20px; background: var(--foreground); color: white; border-radius: 6px; transform: translateY(-180%); }
-.skip-link:focus { transform: translateY(0); }
-.site-header { min-height: 108px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
-.brand-link { display: inline-flex; align-items: center; gap: 12px; color: var(--foreground); text-decoration: none; font-size: 22px; font-weight: 650; letter-spacing: -1px; white-space: nowrap; min-height: 44px; }
-.brand-symbol { width: 42px; height: 42px; display: grid; place-items: center; background: #e8ecdf; border-radius: 12px; color: var(--green); }
-.brand-symbol svg { width: 31px; height: 31px; }
-.brand-period { color: var(--green); }
-.splash-hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: center; min-height: 615px; padding: 48px 0 36px; }
-.hero-copy { padding-bottom: 32px; }
-.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; }
-.hero-copy > .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 28px; }
-.hero-copy > .eyebrow > span { display: inline-block; width: 23px; height: 1px; background: var(--green); }
-h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(58px, 5.5vw, 80px); font-weight: 400; line-height: 1.06; letter-spacing: -4px; }
-h1 em { color: var(--green); font-weight: 400; }
-.hero-description { max-width: 345px; color: var(--muted); font-size: 15px; line-height: 1.85; margin: 25px 0 29px; }
-.primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 34px; min-height: 54px; padding: 0 24px; color: #fff; background: var(--green); border: 1px solid var(--green); border-radius: 7px; font-size: 14px; font-weight: 550; text-decoration: none; transition: background .2s, transform .2s; }
-.primary-button:hover { background: #25563f; transform: translateY(-2px); }
-.primary-button:active { transform: translateY(0); }
-.arrow-icon { width: 22px; height: 22px; flex-shrink: 0; }
-.arrow-back { transform: rotate(180deg); }
-.cta-note { color: var(--muted); font-size: 11px; margin: 13px 0 0; }
-.poster-composition { position: relative; min-width: 0; animation-delay: .08s; }
-.poster-heading { display: flex; justify-content: space-between; align-items: center; padding: 0 14px 10px; color: var(--muted); }
-.poster-heading .eyebrow { font-size: 9px; letter-spacing: 1.3px; }
-.poster-number { font-family: Georgia, serif; font-size: 18px; color: #8c9783; }
-.poster-stage { position: relative; border-radius: 50% 50% 12px 12px; background: radial-gradient(ellipse at 50% 55%, #e8ecdc 0%, #edf0e2 43%, transparent 70%); }
-.workspace-poster { display: block; width: 100%; height: auto; }
-.poster-caption { display: flex; align-items: center; gap: 15px; margin: -10px 14px 0; font-size: 11px; color: var(--muted); line-height: 1.7; }
-.caption-line { width: 34px; height: 1px; background: #a4ad94; }
-.poster-caption strong { font-weight: 500; color: var(--foreground); }
-.sun-symbol { margin-left: auto; color: var(--green); font-size: 33px; line-height: 1; }
-.how-it-works { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 28px 0 30px; list-style: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); animation-delay: .16s; }
-.how-it-works li { display: flex; align-items: flex-start; gap: 16px; padding: 0 30px; border-left: 1px solid var(--line); }
-.how-it-works li:first-child { border-left: 0; padding-left: 0; }
-.how-it-works li:last-child { padding-right: 0; }
-.step-number { margin-top: 2px; font-family: Georgia, serif; color: var(--green); font-size: 17px; }
-.how-it-works h2 { font-size: 13px; font-weight: 600; margin: 0 0 6px; }
-.how-it-works p { font-size: 11px; color: var(--muted); line-height: 1.7; margin: 0; }
-.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 90px; color: var(--muted); font-size: 12px; }
-.creator-credit { display: flex; align-items: center; gap: 10px; }
-.creator-mark { width: 32px; height: 32px; flex-shrink: 0; }
-.entrance { animation: enter .6s ease both; }
-@keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@theme {
+  --breakpoint-phone: 33.75rem;
+  --breakpoint-stacked: 53.125rem;
+  --breakpoint-wide: 68.75rem;
+  --breakpoint-catalog: 75rem;
+  --breakpoint-cinema: 90rem;
+  --animate-entrance: enter .6s ease both;
+  --animate-loading: spin 1.2s linear infinite;
 
-@media (min-width: 1440px) {
-  .splash-hero { min-height: 622px; }
-  .poster-composition { max-width: 610px; justify-self: end; width: 100%; }
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
-@media (max-width: 1100px) {
-  .splash-shell { padding: 0 40px; }
-  .splash-hero { min-height: 540px; gap: 16px; }
-  h1 { font-size: 60px; letter-spacing: -3px; }
-  .how-it-works li { padding: 0 20px; gap: 12px; }
-}
-@media (max-width: 850px) {
-  .splash-shell { padding: 0 32px; }
-  .site-header { min-height: 90px; }
-  .splash-hero { grid-template-columns: 1fr; gap: 30px; padding: 54px 0 36px; }
-  .hero-copy { padding-bottom: 0; }
-  h1 { font-size: clamp(54px, 8.5vw, 72px); }
-  .hero-description { max-width: 420px; margin: 20px 0 25px; }
-  .poster-composition { width: 100%; max-width: 510px; justify-self: center; }
-  .how-it-works li { padding: 0 14px; gap: 10px; }
-  .how-it-works h2 { font-size: 12px; }
-  .how-it-works p { font-size: 11px; }
-  .site-footer { font-size: 12px; }
-}
-@media (max-width: 540px) {
-  .splash-shell { padding: 0 22px; }
-  .site-header { min-height: 79px; gap: 12px; }
-  .brand-link { font-size: 18px; gap: 8px; letter-spacing: -.8px; }
-  .brand-symbol { width: 33px; height: 33px; border-radius: 9px; }
-  .brand-symbol svg { width: 25px; height: 25px; }
-  .splash-hero { padding-top: 42px; gap: 36px; }
-  .hero-copy > .eyebrow { font-size: 9px; letter-spacing: 1.1px; gap: 8px; margin-bottom: 21px; }
-  .hero-copy > .eyebrow > span { width: 16px; }
-  h1 { font-size: clamp(47px, 10.9vw, 58px); line-height: 1.09; letter-spacing: -2.6px; }
-  .hero-description { font-size: 14px; line-height: 1.8; margin: 20px 0 25px; max-width: 330px; }
-  .primary-button { min-height: 54px; padding: 0 22px; gap: 35px; }
-  .poster-heading { padding: 0 0 13px; }
-  .poster-heading .eyebrow { font-size: 8px; letter-spacing: 1px; }
-  .poster-caption { margin: 0; gap: 10px; font-size: 10px; }
-  .caption-line { width: 24px; }
-  .sun-symbol { font-size: 27px; }
-  .how-it-works { grid-template-columns: 1fr; padding: 23px 0; gap: 22px; }
-  .how-it-works li, .how-it-works li:first-child { padding: 0; border: 0; gap: 17px; }
-  .how-it-works h2 { font-size: 13px; margin-bottom: 3px; }
-  .how-it-works p { font-size: 12px; }
-  .site-footer { align-items: flex-start; flex-direction: column; justify-content: center; padding: 23px 0; gap: 9px; }
-  .creator-mark { width: 32px; height: 32px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .entrance { animation: none; }
-  .primary-button { transition: none; }
-  .primary-button:hover, .primary-button:active { transform: none; }
+
+@layer base {
+  html { min-width: 320px; }
+  body { @apply bg-background font-sans text-foreground antialiased; }
+  a { -webkit-tap-highlight-color: transparent; }
+  ::selection { @apply bg-green text-white; }
+  :focus-visible { outline: 3px solid var(--green); outline-offset: 6px; }
+  main:focus { outline: none; }
 }

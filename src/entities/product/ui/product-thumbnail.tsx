@@ -1,9 +1,9 @@
 import type { Product } from "../model/catalog";
 
-export function ProductThumbnail({ product }: { product: Product }) {
+export function ProductThumbnail({ product, className = "" }: { product: Product; className?: string }) {
   const { category, visualKey } = product;
   return (
-    <svg viewBox="0 0 180 130" aria-hidden="true" className="product-thumbnail">
+    <svg viewBox="0 0 180 130" aria-hidden="true" className={"product-thumbnail " + className}>
       <ellipse cx="90" cy="113" rx="54" ry="8" fill="#c9cdbb" opacity=".28" />
       {category === "desk" && (
         <g strokeLinejoin="round">
