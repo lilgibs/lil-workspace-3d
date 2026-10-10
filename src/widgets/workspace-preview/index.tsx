@@ -34,9 +34,9 @@ export function WorkspacePreview({ config, hydrated, variant = "builder" }: { co
   const onReady = useCallback(() => setStatus("ready"), []);
   const onError = useCallback(() => setStatus("error"), []);
   const retry = () => { setStatus("loading"); setAttempt((value) => value + 1); };
-  // The builder preview fills its column on desktop (the page is an app frame there); elsewhere it has a set height.
+  // On desktop both pages are app frames, so the preview fills its column; elsewhere it has a set height.
   const canvasHeight = variant === "summary"
-    ? "h-[clamp(350px,36vw,490px)] max-stacked:h-[clamp(290px,40svh,420px)] max-phone:h-[clamp(250px,34svh,310px)]"
+    ? "lg:h-full max-lg:h-[clamp(350px,36vw,490px)] max-stacked:h-[clamp(290px,40svh,420px)] max-phone:h-[clamp(250px,34svh,310px)]"
     : "lg:h-full max-lg:h-[clamp(275px,37svh,405px)] max-phone:h-[clamp(245px,34svh,305px)] [@media(max-height:550px)_and_(max-width:1023px)]:h-[300px]";
   const viewButtonStyles = "min-h-11 cursor-pointer border-0 border-l border-[#e1e6d5] bg-transparent px-[9px] text-muted first:border-l-0 aria-pressed:bg-[#e5ecd9] aria-pressed:text-green disabled:cursor-not-allowed disabled:opacity-[.48]";
   const failure = (
@@ -49,7 +49,7 @@ export function WorkspacePreview({ config, hydrated, variant = "builder" }: { co
   );
 
   return (
-    <section className={"workspace-preview overflow-hidden rounded-[13px] border border-[#e0e3d6] bg-[#edf0e3]" + (variant === "builder" ? " lg:h-full" : "")} aria-label="Your workspace preview" data-preview-status={status}>
+    <section className={"workspace-preview overflow-hidden rounded-[13px] border border-[#e0e3d6] bg-[#edf0e3] lg:h-full"} aria-label="Your workspace preview" data-preview-status={status}>
       <div className={"preview-canvas relative w-full bg-[radial-gradient(ellipse_at_50%_70%,#dce4ce,#edf0e3_63%)] " + canvasHeight}>
         {!hydrated ? <PreviewLoading message="Restoring your workspace…" /> : status === "error" ? failure : (
           <PreviewBoundary key={attempt} fallback={failure} onError={onError}>
