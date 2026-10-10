@@ -14,16 +14,20 @@ export type CameraView = { angle: "angle" | "front"; revision: number };
 
 function ItemEntrance({ children, position = [0, 0, 0] }: { children: ReactNode; position?: [number, number, number] }) {
   const group = useRef<Group>(null);
+  const progress = useRef(1);
   const invalidate = useThree((state) => state.invalidate);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   useEffect(() => {
-    if (group.current) group.current.scale.setScalar(reducedMotion ? 1 : 0.96);
+    progress.current = reducedMotion ? 1 : 0;
+    if (group.current && !reducedMotion) group.current.scale.setScalar(0.6);
     invalidate();
   }, [invalidate, reducedMotion]);
   useFrame((_, delta) => {
-    if (!group.current || group.current.scale.x >= 0.9999) return;
-    const scale = Math.min(1, group.current.scale.x + delta * 0.2);
-    group.current.scale.setScalar(scale);
+    if (!group.current || progress.current >= 1) return;
+    const t = progress.current = Math.min(1, progress.current + delta / 0.5);
+    const back = 1 + 2.70158 * (t - 1) ** 3 + 1.70158 * (t - 1) ** 2; // ease-out-back: a small overshoot reads as "placed"
+    group.current.scale.setScalar(0.6 + 0.4 * back);
+    group.current.position.y = position[1] + (1 - t) * 0.1;
     invalidate();
   });
   return <group ref={group} position={position}>{children}</group>;
@@ -41,6 +45,8 @@ function Room() {
     <BackdropBox size={[2.8, 0.035, 0.035]} position={[0, 0.02, -1.27]} color="#f5f0e3" />
     <BackdropBox size={[0.035, 0.035, 2.6]} position={[-1.37, 0.02, 0]} color="#f5f0e3" />
     <gridHelper args={[2.5, 10, "#d3cbb8", "#dcd5c4"]} position={[0, -0.003, 0]} />
+    <BackdropBox size={[2.05, 0.012, 1.6]} position={[0.05, 0.006, 0.22]} color="#d2d9c0" rounded />
+    <BackdropBox size={[1.85, 0.012, 1.4]} position={[0.05, 0.0075, 0.22]} color="#dde3cc" rounded />
     <BackdropBox size={[0.006, 0.74, 0.57]} position={[-1.379, 0.97, -0.48]} color="#f6efda" />
     <BackdropBox size={[0.012, 0.74, 0.022]} position={[-1.372, 0.97, -0.48]} color="#cbd6bf" />
     <BackdropBox size={[0.012, 0.022, 0.57]} position={[-1.372, 0.97, -0.48]} color="#cbd6bf" />
@@ -98,8 +104,9 @@ export default function WorkspaceScene({ config, view, onReady, onError }: { con
   const depth = desk?.dimensions.depth ?? 0.6;
   return (
     <Canvas orthographic camera={{ position: [4.1, 3.1, 4.1], near: 0.1, far: 30, zoom: 100 }} frameloop="demand" dpr={[1, 1.5]} shadows gl={{ antialias: true, alpha: true, powerPreference: "low-power" }} onCreated={onReady} aria-label="Interactive 3D workspace preview" style={{ touchAction: "pan-y" }}>
-      <ambientLight intensity={1.5} />
-      <directionalLight position={[1.5, 5, 3]} intensity={2.4} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-3} shadow-camera-right={3} shadow-camera-top={3} shadow-camera-bottom={-3} shadow-bias={-0.0005} shadow-normalBias={0.025} />
+      <ambientLight intensity={1.1} color="#fff4e3" />
+      <hemisphereLight args={["#fbf5e8", "#b9c3a8", 0.9]} />
+      <directionalLight color="#ffe8c8" position={[1.5, 5, 3]} intensity={2.3} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-3} shadow-camera-right={3} shadow-camera-top={3} shadow-camera-bottom={-3} shadow-bias={-0.0005} shadow-normalBias={0.025} />
       <Room />
       {!desk && <group name="Desk placement guide" position={[0, 0.005, -0.15]}><mesh rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[1.25, 0.65]} /><meshStandardMaterial color="#b7c4a7" transparent opacity={0.24} /></mesh><Box size={[1.25, 0.002, 0.007]} position={[0, 0, -0.325]} color="#a7b995" /><Box size={[1.25, 0.002, 0.007]} position={[0, 0, 0.325]} color="#a7b995" /></group>}
       {desk && <ItemEntrance key={desk.id} position={[0, 0, -0.15]}><Desk width={width} depth={depth} wide={desk.id === "desk-wide"} /></ItemEntrance>}

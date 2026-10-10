@@ -1,2 +1,3 @@
 export { useWorkspaceViewModel } from "./model/use-workspace-view-model";
-export { WORKSPACE_STORAGE_KEY, restoreConfiguration, projectWorkspace, selectFurniture, setAccessoryQuantity } from "./model/configuration";
+export type { Preset } from "./model/configuration";
+export { WORKSPACE_STORAGE_KEY, PRESETS, applyPreset, matchesPreset, restoreConfiguration, projectWorkspace, selectFurniture, setAccessoryQuantity } from "./model/configuration";

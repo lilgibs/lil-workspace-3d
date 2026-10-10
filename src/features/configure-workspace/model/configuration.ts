@@ -68,3 +68,23 @@ export function projectWorkspace(config: WorkspaceConfig) {
   const monthlyTotal = monthlySubtotal(lines);
   return { desk, chair, lines, monthlyTotal, periodEstimate: monthlyTotal * config.rentalMonths, itemCount: lines.reduce((sum, line) => sum + line.quantity, 0), isComplete: Boolean(desk && chair) };
 }
+
+export const PRESETS = [
+  { id: "focus", name: "Focus", description: "Compact desk, ergonomic chair, one monitor, and a lamp.", deskId: "desk-compact", chairId: "chair-ergo", accessories: { "monitor-standard": 1, "lamp-task": 1 } },
+  { id: "dual", name: "Dual Screen", description: "Wide desk, mesh chair, two monitors, and a plant.", deskId: "desk-wide", chairId: "chair-mesh", accessories: { "monitor-standard": 2, "plant-small": 1 } },
+  { id: "minimal", name: "Minimal", description: "Compact desk and a mesh chair. Nothing else.", deskId: "desk-compact", chairId: "chair-mesh", accessories: {} },
+] as const;
+export type Preset = typeof PRESETS[number];
+
+export function applyPreset(config: WorkspaceConfig, presetId: string): WorkspaceConfig {
+  const preset = PRESETS.find((item) => item.id === presetId);
+  if (!preset) return config;
+  let next = { ...selectFurniture(selectFurniture(config, preset.deskId), preset.chairId), accessoryCounts: {} };
+  for (const [id, quantity] of Object.entries(preset.accessories)) next = setAccessoryQuantity(next, id, quantity);
+  return next;
+}
+
+export function matchesPreset(config: WorkspaceConfig, preset: Preset) {
+  const counts = Object.entries(config.accessoryCounts).filter(([, quantity]) => quantity > 0);
+  return config.deskId === preset.deskId && config.chairId === preset.chairId && counts.length === Object.keys(preset.accessories).length && counts.every(([id, quantity]) => (preset.accessories as Record<string, number>)[id] === quantity);
+}

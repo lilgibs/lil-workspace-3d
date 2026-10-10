@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { emptyWorkspace } from "@/entities/workspace";
-import { projectWorkspace, restoreConfiguration, selectFurniture, setAccessoryQuantity } from "./configuration";
+import { PRESETS, applyPreset, matchesPreset, projectWorkspace, restoreConfiguration, selectFurniture, setAccessoryQuantity } from "./configuration";
 
 describe("workspace configuration", () => {
   it("starts with no furniture, no charges, and a one-month duration", () => {
@@ -83,5 +83,23 @@ describe("saved workspace recovery", () => {
     expect(restored.config.deskId).toBeNull();
     expect(restored.config.accessoryCounts).toEqual({});
     expect(projectWorkspace(restored.config).monthlyTotal).toBe(180000);
+  });
+});
+
+describe("quick start presets", () => {
+  it("applies every preset through the same selection rules and keeps the duration", () => {
+    for (const preset of PRESETS) {
+      const config = applyPreset({ ...emptyWorkspace(), rentalMonths: 6 }, preset.id);
+      expect(config.rentalMonths).toBe(6);
+      expect(matchesPreset(config, preset)).toBe(true);
+      expect(projectWorkspace(config).isComplete).toBe(true);
+    }
+    expect(applyPreset(emptyWorkspace(), "unknown")).toEqual(emptyWorkspace());
+  });
+
+  it("stops matching a preset once the setup is edited", () => {
+    const focus = applyPreset(emptyWorkspace(), "focus");
+    expect(matchesPreset(setAccessoryQuantity(focus, "monitor-standard", 2), PRESETS[0])).toBe(false);
+    expect(matchesPreset(selectFurniture(focus, "chair-mesh"), PRESETS[0])).toBe(false);
   });
 });

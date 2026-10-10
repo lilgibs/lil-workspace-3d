@@ -16,9 +16,9 @@ export function ConfirmationDialog({ open, onClose, onConfirm }: { open: boolean
       ref={ref} aria-labelledby="reset-title" aria-describedby="reset-description" onCancel={onClose} onClose={onClose}
     >
       <form method="dialog" onSubmit={(event) => event.preventDefault()}>
-        <p className="eyebrow mb-[14px] text-[10px] font-semibold tracking-[1.8px] text-green uppercase">A fresh start</p>
+        <p className="eyebrow mb-[14px] text-[12px] font-semibold tracking-[1.8px] text-green uppercase">A fresh start</p>
         <h2 className="font-display text-[30px] leading-[1.2] font-normal tracking-[-.8px]" id="reset-title">Clear your workspace?</h2>
-        <p className="mt-4 mb-[25px] text-[13px] leading-[1.8] text-muted" id="reset-description">Your furniture, accessories, and rental duration will be reset. You can start building again right away.</p>
+        <p className="mt-4 mb-[25px] text-sm leading-[1.8] text-muted" id="reset-description">Your furniture, accessories, and rental duration will be reset. You can start building again right away.</p>
         <div className="dialog-actions flex justify-end gap-2.5 max-phone:justify-stretch">
           <button type="button" className={secondaryButtonStyles + " max-phone:flex-1"} autoFocus onClick={onClose}>Keep my setup</button>
           <button type="button" className={primaryButtonStyles("compact") + " max-phone:flex-1"} onClick={onConfirm}>Reset setup</button>

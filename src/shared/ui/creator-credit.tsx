@@ -2,7 +2,7 @@ import { BRANDING } from "@/shared/config/branding";
 
 export function CreatorSignature({ compact = false }: { compact?: boolean }) {
   return (
-    <div className={"creator-credit flex items-center text-xs leading-normal text-muted " + (compact ? "gap-2.5 max-phone:gap-[7px]" : "gap-2.5")}>
+    <div className={"creator-credit flex items-center text-[13px] leading-normal text-muted " + (compact ? "gap-2.5 max-phone:gap-[7px]" : "gap-2.5")}>
       <svg className={"creator-mark shrink-0 " + (compact ? "size-[27px] max-phone:size-[21px]" : "size-8")} viewBox="0 0 74 74" aria-hidden="true">
         <circle cx="37" cy="37" r="37" fill="#303164" />
         <circle cx="37" cy="37" r="34" fill="none" stroke="#7dd4dc" strokeWidth="2" />
@@ -17,5 +17,5 @@ export function CreatorSignature({ compact = false }: { compact?: boolean }) {
 }
 
 export function CreatorCredit() {
-  return <footer className="site-footer flex min-h-[90px] items-center justify-between gap-5 text-xs leading-normal text-muted max-phone:flex-col max-phone:items-start max-phone:justify-center max-phone:gap-[9px] max-phone:py-[23px]"><CreatorSignature /></footer>;
+  return <footer className="site-footer flex min-h-[90px] items-center justify-between gap-5 text-[13px] leading-normal text-muted max-phone:flex-col max-phone:items-start max-phone:justify-center max-phone:gap-[9px] max-phone:py-[23px]"><CreatorSignature /></footer>;
 }

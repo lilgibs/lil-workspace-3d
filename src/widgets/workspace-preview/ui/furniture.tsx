@@ -26,6 +26,7 @@ export function Desk({ width, depth, wide }: { width: number; depth: number; wid
       <Box size={[0.035, 0.035, depth - 0.085]} position={[side * (width / 2 - 0.08), 0.03, 0]} color="#485548" />
     </group>) : [-1, 1].flatMap((x) => [-1, 1].map((z) => <Box key={`${x}-${z}`} size={[0.055, 0.69, 0.055]} position={[x * (width / 2 - 0.065), 0.35, z * (depth / 2 - 0.065)]} color="#b68b5c" />))}
     {wide && <Box size={[width - 0.16, 0.035, 0.035]} position={[0, 0.62, -depth / 2 + 0.06]} color="#485548" />}
+    <DeskExtras width={width} depth={depth} />
   </group>;
 }
 
@@ -85,5 +86,18 @@ export function Plant() {
     <mesh position={[0, 0.09, 0]}><cylinderGeometry args={[0.046, 0.046, 0.003, 14]} /><meshStandardMaterial color="#63583e" /></mesh>
     <Rod start={[0, 0.085, 0]} end={[0, 0.225, 0]} radius={0.004} color="#486744" />
     {[[-0.04, 0.15, 0, 0.7], [0.04, 0.18, 0, -0.7], [0, 0.205, 0.02, 0.2], [0.025, 0.13, 0.035, -0.9], [-0.02, 0.19, -0.025, 0.6]].map(([x, y, z, angle], index) => <mesh key={index} position={[x, y, z]} rotation={[0.25, index * 0.7, angle]} scale={[0.022, 0.055, 0.009]} castShadow><sphereGeometry args={[1, 8, 6]} /><meshStandardMaterial color={index % 2 ? "#527c4e" : "#7d965e"} /></mesh>)}
+  </group>;
+}
+
+export function DeskExtras({ width, depth }: { width: number; depth: number }) {
+  const front = depth * 0.22;
+  const mug: Point = [-width / 2 + 0.3, 0.79, front - 0.03];
+  return <group name="Desk extras">
+    <Box size={[0.36, 0.014, 0.12]} position={[0, 0.757, front]} color="#e9e5d7" rounded />
+    <Box size={[0.32, 0.004, 0.08]} position={[0, 0.766, front]} color="#c6cabb" castShadow={false} />
+    <Box size={[0.055, 0.03, 0.09]} position={[0.27, 0.765, front + 0.01]} color="#f1eee4" rounded />
+    <mesh position={mug} castShadow><cylinderGeometry args={[0.032, 0.028, 0.08, 14]} /><meshStandardMaterial color="#f3ede0" roughness={0.6} /></mesh>
+    <mesh position={[mug[0] + 0.036, mug[1] + 0.005, mug[2]]}><torusGeometry args={[0.02, 0.006, 8, 14]} /><meshStandardMaterial color="#f3ede0" roughness={0.6} /></mesh>
+    <mesh position={[mug[0], mug[1] + 0.041, mug[2]]} rotation={[-Math.PI / 2, 0, 0]}><circleGeometry args={[0.026, 14]} /><meshStandardMaterial color="#6b4a33" /></mesh>
   </group>;
 }

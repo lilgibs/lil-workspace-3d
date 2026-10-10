@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { emptyWorkspace, useWorkspaceStore, type RentalMonths } from "@/entities/workspace";
-import { projectWorkspace, selectFurniture, setAccessoryQuantity } from "./configuration";
+import { applyPreset, projectWorkspace, selectFurniture, setAccessoryQuantity } from "./configuration";
 
 export function useWorkspaceViewModel() {
   const config = useWorkspaceStore((state) => state.config);
@@ -26,6 +26,10 @@ export function useWorkspaceViewModel() {
     setRentalMonths(rentalMonths: RentalMonths) {
       updateConfig((current) => ({ ...current, rentalMonths }));
       setAnnouncement("Rental duration updated.");
+    },
+    applyPreset(id: string) {
+      updateConfig((current) => applyPreset(current, id));
+      setAnnouncement("Quick start applied. Workspace updated.");
     },
     resetSetup() {
       updateConfig(() => emptyWorkspace());

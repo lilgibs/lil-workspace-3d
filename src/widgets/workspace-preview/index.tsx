@@ -10,7 +10,7 @@ function PreviewLoading({ message }: { message: string }) {
   return (
     <div className="preview-loading absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
       <span className="loading-orbit size-8 rounded-full border-2 border-[#d4ddc5] border-t-green motion-safe:animate-loading" aria-hidden="true" />
-      <p className="max-w-[290px] text-xs leading-[1.8] text-muted">{message}</p>
+      <p className="max-w-[290px] text-[13px] leading-[1.8] text-muted">{message}</p>
     </div>
   );
 }
@@ -45,7 +45,7 @@ export function WorkspacePreview({ config, hydrated, variant = "builder" }: { co
     <div className="preview-error absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center max-phone:gap-3" role="status">
       <span className="text-[34px] text-green" aria-hidden="true">↺</span>
       <h3 className="font-display text-[26px] font-normal max-phone:text-[21px]">3D preview is unavailable</h3>
-      <p className="max-w-[290px] text-xs leading-[1.8] text-muted max-phone:text-[11px]">Your setup is safe. You can keep choosing your pieces and try the preview again.</p>
+      <p className="max-w-[290px] text-[13px] leading-[1.8] text-muted max-phone:text-[13px]">Your setup is safe. You can keep choosing your pieces and try the preview again.</p>
       <button type="button" className={secondaryButtonStyles} onClick={retry}>Retry Preview</button>
     </div>
   );
@@ -53,8 +53,8 @@ export function WorkspacePreview({ config, hydrated, variant = "builder" }: { co
   return (
     <section className="workspace-preview overflow-hidden rounded-[13px] border border-[#e0e3d6] bg-[#edf0e3]" aria-label="Your workspace preview" data-preview-status={status}>
       <div className="preview-heading flex items-center justify-between gap-[15px] px-[25px] pt-[23px] max-phone:px-[15px] max-phone:pt-[17px]">
-        <span className="eyebrow text-[9px] font-semibold tracking-[1.5px] text-[#59694c] uppercase max-phone:text-[8px] max-phone:tracking-[1.1px]">Your little corner</span>
-        <span className="preview-item-count text-[10px] text-[#67765b] max-phone:text-[9px]">{!hydrated ? "Loading setup" : status === "error" ? "Preview unavailable" : status === "ready" ? "Live preview" : "Loading preview"}</span>
+        <span className="eyebrow text-[12px] font-semibold tracking-[1.5px] text-[#59694c] uppercase max-phone:text-[12px] max-phone:tracking-[1.1px]">Your little corner</span>
+        <span className="preview-item-count text-[12px] text-[#67765b] max-phone:text-[12px]">{!hydrated ? "Loading setup" : status === "error" ? "Preview unavailable" : status === "ready" ? "Live preview" : "Loading preview"}</span>
       </div>
       <div className={"preview-canvas relative w-full bg-[radial-gradient(ellipse_at_50%_70%,#dce4ce,#edf0e3_63%)] " + canvasHeight}>
         {!hydrated ? <PreviewLoading message="Restoring your workspace…" /> : status === "error" ? failure : (
@@ -65,15 +65,15 @@ export function WorkspacePreview({ config, hydrated, variant = "builder" }: { co
         {hydrated && status === "ready" && !config.deskId && (
           <div className="empty-preview-hint pointer-events-none absolute bottom-[22px] left-1/2 flex -translate-x-1/2 items-center gap-[9px] rounded-full border border-[#d4ddc4] bg-[#fbfcf3e6] px-[15px] py-2.5 whitespace-nowrap text-[#48613f] max-phone:bottom-[15px] max-phone:px-[11px] max-phone:py-[7px]">
             <span className="text-lg leading-normal" aria-hidden="true">+</span>
-            <p className="text-[11px] max-phone:text-[10px]">Pick a desk to get started</p>
+            <p className="text-[13px] max-phone:text-[12px]">Pick a desk, or try a quick start</p>
           </div>
         )}
       </div>
       <div className={"preview-bottom flex justify-between gap-[15px] px-[23px] pt-[5px] pb-[19px] max-phone:gap-3 max-phone:px-[14px] max-phone:pt-0 max-phone:pb-[15px] " + footerLayout}>
-        <p className={"text-[11px] leading-[1.7] text-[#626f56] max-phone:text-center max-phone:text-[10px] " + (variant === "builder" ? "max-catalog:max-w-40 max-lg:max-w-none" : "")}>{status === "error" ? "Your selections are still available." : "A few good pieces. A space of your own."}</p>
+        <p className={"text-[13px] leading-[1.7] text-[#626f56] max-phone:text-center max-phone:text-[12px] " + (variant === "builder" ? "max-catalog:max-w-40 max-lg:max-w-none" : "")}>{status === "error" ? "Your selections are still available." : "A few good pieces. A space of your own."}</p>
         <div className="view-controls inline-flex shrink-0 overflow-hidden rounded-md border border-[#d2dac5] bg-[#f7f8f0]" role="group" aria-label="Camera views">
-          <button className={viewButtonStyles + " min-w-[49px] text-[10px]"} type="button" aria-label="Angled view" aria-pressed={view.angle === "angle"} disabled={status !== "ready"} onClick={() => setView((current) => ({ angle: "angle", revision: current.revision + 1 }))}>Angle</button>
-          <button className={viewButtonStyles + " min-w-[49px] text-[10px]"} type="button" aria-label="Front view" aria-pressed={view.angle === "front"} disabled={status !== "ready"} onClick={() => setView((current) => ({ angle: "front", revision: current.revision + 1 }))}>Front</button>
+          <button className={viewButtonStyles + " min-w-[49px] text-[12px]"} type="button" aria-label="Angled view" aria-pressed={view.angle === "angle"} disabled={status !== "ready"} onClick={() => setView((current) => ({ angle: "angle", revision: current.revision + 1 }))}>Angle</button>
+          <button className={viewButtonStyles + " min-w-[49px] text-[12px]"} type="button" aria-label="Front view" aria-pressed={view.angle === "front"} disabled={status !== "ready"} onClick={() => setView((current) => ({ angle: "front", revision: current.revision + 1 }))}>Front</button>
           <button className={viewButtonStyles + " min-w-11 text-lg leading-normal"} type="button" aria-label="Reset view" disabled={status !== "ready"} onClick={() => setView((current) => ({ angle: "angle", revision: current.revision + 1 }))}>↺<span className="sr-only">Reset view</span></button>
         </div>
       </div>
