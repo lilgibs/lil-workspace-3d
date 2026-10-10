@@ -40,4 +40,8 @@
   ::selection { @apply bg-green text-white; }
   :focus-visible { outline: 3px solid var(--green); outline-offset: 6px; }
   main:focus { outline: none; }
+  /* The catalog drawer scrolls on its own below the desktop breakpoint; lock the page behind it. */
+  @media (width < 64rem) {
+    body:has(.catalog-sidebar[data-open]) { overflow: hidden; }
+  }
 }
